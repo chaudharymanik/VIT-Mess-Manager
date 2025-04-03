@@ -1,6 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast";
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081/api';
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -28,13 +31,61 @@ const wasteTips = [
 ];
 
 const WasteStats = () => {
-  // Sample data - in a real app, this would come from your backend
-  const [data] = useState([
-    { name: "Preparation", value: 35 },
-    { name: "Plate Waste", value: 25 },
-    { name: "Storage", value: 20 },
-    { name: "Other", value: 20 }
+  const { toast } = useToast();
+  const [data, setData] = useState([
+    { name: "Preparation", value: 0 },
+    { name: "Plate Waste", value: 0 },
+    { name: "Storage", value: 0 },
+    { name: "Other", value: 0 }
   ]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchWasteData();
+  }, []);
+
+  const fetchWasteData = async () => {
+    try {
+      const response = await fetch(`${API_URL}/waste`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch waste data');
+      }
+      const wasteEntries = await response.json();
+      
+      // Process the data to get waste distribution by type
+      const wasteByType = {
+        prep: 0,
+        plate: 0,
+        storage: 0,
+        other: 0
+      };
+      
+      wasteEntries.forEach(entry => {
+        if (wasteByType.hasOwnProperty(entry.type)) {
+          wasteByType[entry.type] += entry.amount;
+        }
+      });
+      
+      // Convert to chart data format
+      const chartData = [
+        { name: "Preparation", value: wasteByType.prep },
+        { name: "Plate Waste", value: wasteByType.plate },
+        { name: "Storage", value: wasteByType.storage },
+        { name: "Other", value: wasteByType.other }
+      ];
+      
+      setData(chartData);
+    } catch (error) {
+      console.error('Error fetching waste data:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch waste data. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="py-16">
@@ -53,25 +104,31 @@ const WasteStats = () => {
           </CardHeader>
           <CardContent>
             <div className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={data}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+              {loading ? (
+                <div className="flex items-center justify-center h-full">
+                  <p>Loading waste data...</p>
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={data}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    >
+                      {data.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </CardContent>
         </Card>

@@ -9,6 +9,7 @@ import MenuSelection from "./pages/MenuSelection";
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
 import WasteManagement from "./pages/WasteManagement";
+import WasteAnalysis from "./pages/WasteAnalysis";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/menu-selection" element={<MenuSelection />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/waste-management" element={<WasteManagement />} />
+          <Route path="/waste-analysis" element={<WasteAnalysis />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

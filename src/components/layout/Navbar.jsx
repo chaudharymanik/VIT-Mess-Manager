@@ -21,7 +21,8 @@ const Navbar = () => {
     { name: "Register", path: "/register" },
     { name: "Menu Selection", path: "/menu-selection" },
     { name: "Dashboard", path: "/dashboard" },
-    { name: "Waste Management", path: "/waste-management" }
+    { name: "Waste Management", path: "/waste-management" },
+    { name: "Waste Analysis", path: "/waste-analysis" }
   ];
 
   return (

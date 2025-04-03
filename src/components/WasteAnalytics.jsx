@@ -1,17 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { useState } from "react";
 
-const WasteAnalytics = () => {
-  // Sample data - in a real app, this would come from your backend
-  const [data] = useState([
+const WasteAnalytics = ({ data = [] }) => {
+  // Default data if none is provided
+  const defaultData = [
     { date: "Jan", waste: 65 },
     { date: "Feb", waste: 59 },
     { date: "Mar", waste: 80 },
     { date: "Apr", waste: 81 },
     { date: "May", waste: 56 },
     { date: "Jun", waste: 55 },
-  ]);
+  ];
+
+  const chartData = data.length > 0 ? data : defaultData;
 
   return (
     <Card className="mt-6">
@@ -21,7 +22,7 @@ const WasteAnalytics = () => {
       <CardContent>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data}>
+            <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
               <YAxis />
