@@ -148,9 +148,13 @@ const StudentForm = () => {
             name="regNo"
             value={formData.regNo}
             onChange={handleChange}
-            placeholder="2023CS0001"
+            placeholder=" 23BCEXXXX"
             maxLength={10}
             className={errors.regNo ? 'border-red-500' : ''}
+            style={{
+              backgroundColor: 'black',
+              color: 'white'
+            }}
           />
           {errors.regNo && (
             <p className="text-sm text-red-500">{errors.regNo}</p>
@@ -164,9 +168,13 @@ const StudentForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="John Doe"
+            placeholder=" John Doe"
             maxLength={50}
             className={errors.name ? 'border-red-500' : ''}
+            style={{
+              backgroundColor: 'black',
+              color: 'white'
+            }}
           />
           {errors.name && (
             <p className="text-sm text-red-500">{errors.name}</p>
@@ -181,9 +189,13 @@ const StudentForm = () => {
               name="block"
               value={formData.block}
               onChange={handleChange}
-              placeholder="A"
+              placeholder=" A"
               maxLength={1}
               className={errors.block ? 'border-red-500' : ''}
+              style={{
+                backgroundColor: 'black',
+                color: 'white'
+              }}
             />
             {errors.block && (
               <p className="text-sm text-red-500">{errors.block}</p>
@@ -197,9 +209,13 @@ const StudentForm = () => {
               name="roomNumber"
               value={formData.roomNumber}
               onChange={handleChange}
-              placeholder="101"
-              maxLength={3}
+              placeholder=" 101"
+              maxLength={4}
               className={errors.roomNumber ? 'border-red-500' : ''}
+              style={{
+                backgroundColor: 'black',
+                color: 'white'
+              }}
             />
             {errors.roomNumber && (
               <p className="text-sm text-red-500">{errors.roomNumber}</p>
@@ -207,26 +223,48 @@ const StudentForm = () => {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="mess">Mess</Label>
-          <Select
-            value={formData.mess}
-            onValueChange={(value) => handleSelectChange('mess', value)}
-          >
-            <SelectTrigger className={errors.mess ? 'border-red-500' : ''}>
-              <SelectValue placeholder="Select mess" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Anna Mess">Anna Mess</SelectItem>
-              <SelectItem value="Bharathiar Mess">Bharathiar Mess</SelectItem>
-              <SelectItem value="Tagore Mess">Tagore Mess</SelectItem>
-              <SelectItem value="Gandhi Mess">Gandhi Mess</SelectItem>
-            </SelectContent>
-          </Select>
-          {errors.mess && (
-            <p className="text-sm text-red-500">{errors.mess}</p>
-          )}
-        </div>
+        <div className="space-y-2 relative">
+  <Label htmlFor="mess" style={{ color: 'white' }}>Mess</Label>
+  <Select
+    value={formData.mess}
+    onValueChange={(value) => handleSelectChange('mess', value)}
+  >
+    <SelectTrigger 
+      className={errors.mess ? 'border-red-500' : ''}
+      style={{
+        backgroundColor: '#000', 
+        color: '#fff', 
+        border: '1px solid #fff',
+        borderRadius: '4px',
+        padding: '8px',
+        width: '100%',
+      }}
+    >
+      <SelectValue placeholder="Select mess" />
+    </SelectTrigger>
+    <SelectContent
+      position="popper"
+      style={{
+        backgroundColor: '#000',
+        color: '#fff',
+        borderRadius: '4px',
+        zIndex: 999,
+        border: '1px solid #fff',
+        width: '100%',
+        padding: '4px 0',
+      }}
+    >
+      <SelectItem value="Anna Mess" className="hover:bg-gray-700">Anna Mess</SelectItem>
+      <SelectItem value="Bharathiar Mess" className="hover:bg-gray-700">Bharathiar Mess</SelectItem>
+      <SelectItem value="Tagore Mess" className="hover:bg-gray-700">Tagore Mess</SelectItem>
+      <SelectItem value="Gandhi Mess" className="hover:bg-gray-700">Gandhi Mess</SelectItem>
+    </SelectContent>
+  </Select>
+  {errors.mess && (
+    <p className="text-sm text-red-500">{errors.mess}</p>
+  )}
+</div>
+
 
         <div className="space-y-2">
           <Label>Mess Type</Label>
