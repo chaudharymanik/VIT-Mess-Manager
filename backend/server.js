@@ -18,8 +18,7 @@ mongoose.connect('mongodb://localhost:27017/vit-mess-manager', {
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// Sample API Route
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Application Server is Running');
 });
 

@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import Navbar from "@/components/layout/Navbar";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const WasteManagement = () => {
   const { toast } = useToast();

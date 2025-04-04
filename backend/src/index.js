@@ -5,11 +5,8 @@ const connectDB = require('./config/db');
 const studentRoutes = require('./routes/studentRoutes');
 const wasteRoutes = require('./routes/wasteRoutes');
 
-// Initialize express app
 const app = express();
 
-// Connect to database
-connectDB();
 
 // Middleware
 app.use(cors({
