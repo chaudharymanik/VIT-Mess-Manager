@@ -52,7 +52,6 @@ const WasteStats = () => {
       }
       const wasteEntries = await response.json();
       
-      // Process the data to get waste distribution by type
       const wasteByType = {
         prep: 0,
         plate: 0,
@@ -66,7 +65,6 @@ const WasteStats = () => {
         }
       });
       
-      // Convert to chart data format
       const chartData = [
         { name: "Preparation", value: wasteByType.prep },
         { name: "Plate Waste", value: wasteByType.plate },

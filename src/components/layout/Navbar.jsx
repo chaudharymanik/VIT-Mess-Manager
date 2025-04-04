@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../styles/Navbar.css";
 import NotificationCenter from "../NotificationCenter";
+import { Utensils } from "lucide-react";
 
 const Navbar = () => {
   const location = useLocation();
@@ -29,7 +30,8 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          VIT Mess Manager
+          <Utensils className="logo-icon" />
+          <span>VIT Mess Manager</span>
         </Link>
         
         <ul className="navbar-links">

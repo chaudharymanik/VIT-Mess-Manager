@@ -67,7 +67,6 @@ const StudentForm = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -81,7 +80,6 @@ const StudentForm = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user makes a selection
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -112,7 +110,6 @@ const StudentForm = () => {
 
       if (!response.ok) {
         if (data.errors && Array.isArray(data.errors)) {
-          // Handle multiple validation errors
           data.errors.forEach(error => {
             toast.error(error);
           });

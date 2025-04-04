@@ -26,7 +26,6 @@ const FeedbackForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
     toast({
       title: "Feedback Submitted",
       description: "Thank you for your feedback! We'll review it shortly.",

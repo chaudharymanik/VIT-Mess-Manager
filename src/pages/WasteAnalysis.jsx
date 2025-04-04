@@ -24,7 +24,6 @@ const WasteAnalysis = () => {
       }
       const data = await response.json();
       
-      // Process data for monthly trends
       const monthlyData = processMonthlyData(data);
       setWasteData(monthlyData);
     } catch (error) {
@@ -40,7 +39,6 @@ const WasteAnalysis = () => {
   };
 
   const processMonthlyData = (data) => {
-    // Group waste entries by month
     const monthlyWaste = {};
     
     data.forEach(entry => {
@@ -54,7 +52,6 @@ const WasteAnalysis = () => {
       monthlyWaste[monthYear] += entry.amount;
     });
     
-    // Convert to array format for chart
     return Object.entries(monthlyWaste).map(([date, waste]) => ({
       date,
       waste

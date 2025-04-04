@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const WasteAnalytics = ({ data = [] }) => {
-  // Default data if none is provided
   const defaultData = [
     { date: "Jan", waste: 65 },
     { date: "Feb", waste: 59 },

@@ -12,6 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const MenuSelectionForm = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const MenuSelectionForm = () => {
     mealType: "",
     suggestion: "",
     feasibleForMassProduction: false,
-    date: new Date(),
+    date: new Date().toISOString().split('T')[0],
   });
 
   const [loading, setLoading] = useState(false);
@@ -28,9 +29,9 @@ const MenuSelectionForm = () => {
   
   // Mock student data for demo purposes
   const students = [
-    { id: "1", name: "John Doe", regNo: "2023CS001" },
-    { id: "2", name: "Jane Smith", regNo: "2023CS002" },
-    { id: "3", name: "Robert Johnson", regNo: "2023CS003" },
+    { id: "1", name: "John Doe", regNo: "23CS001" },
+    { id: "2", name: "Jane Smith", regNo: "23CS002" },
+    { id: "3", name: "Robert Johnson", regNo: "23CS003" },
   ];
 
   const validateForm = () => {
@@ -92,7 +93,7 @@ const MenuSelectionForm = () => {
         mealType: "",
         suggestion: "",
         feasibleForMassProduction: false,
-        date: new Date(),
+        date: new Date().toISOString().split('T')[0],
       });
       setErrors({});
     } catch (error) {
@@ -134,33 +135,43 @@ const MenuSelectionForm = () => {
     >
       <BlurCard variant="elevated" className="w-full max-w-2xl mx-auto p-4 sm:p-8 bg-card/50">
         <motion.div className="space-y-2 mb-6" variants={itemVariants}>
-          <div className="chip animate-in">Menu Selection</div>
-          <h2 className="heading-2">Meal Preferences</h2>
-          <p className="body-text">Select your meal preferences and suggest food items</p>
+          <div className="chip animate-in" style={{ color: 'white' }}>Menu Selection</div>
+          <h2 className="heading-2" style={{ color: 'white' }}>Meal Preferences</h2>
+          <p className="body-text" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Select your meal preferences and suggest food items</p>
         </motion.div>
-        
+        <Card style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="studentId" className="text-sm font-medium">Select Student</Label>
+              <Label htmlFor="studentId" className="text-sm font-medium" style={{ color: 'white' }}>Select Student</Label>
               <Select 
                 onValueChange={(value) => handleSelectChange("studentId", value)}
                 value={formData.studentId}
               >
-                <SelectTrigger className={cn(
-                  "w-full transition-all duration-200",
-                  "hover:border-primary/50",
-                  "focus:ring-2 focus:ring-primary/20",
-                  errors.studentId && "border-red-500 focus:ring-red-500/20"
-                )}>
+                <SelectTrigger style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                  }
+                }}>
                   <SelectValue placeholder="Select a student" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}>
                   {students.map((student) => (
                     <SelectItem 
                       key={student.id} 
-                      value={student.id} 
-                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      value={student.id}
+                      style={{
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                        }
+                      }}
                     >
                       {student.name} ({student.regNo})
                     </SelectItem>
@@ -173,25 +184,35 @@ const MenuSelectionForm = () => {
             </motion.div>
             
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="mealType" className="text-sm font-medium">Meal Type</Label>
+              <Label htmlFor="mealType" className="text-sm font-medium" style={{ color: 'white' }}>Meal Type</Label>
               <Select 
                 onValueChange={(value) => handleSelectChange("mealType", value)}
                 value={formData.mealType}
               >
-                <SelectTrigger className={cn(
-                  "w-full transition-all duration-200",
-                  "hover:border-primary/50",
-                  "focus:ring-2 focus:ring-primary/20",
-                  errors.mealType && "border-red-500 focus:ring-red-500/20"
-                )}>
+                <SelectTrigger style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                  }
+                }}>
                   <SelectValue placeholder="Select meal type" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}>
                   {mealTypes.map((type) => (
                     <SelectItem 
                       key={type} 
-                      value={type} 
-                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      value={type}
+                      style={{
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                        }
+                      }}
                     >
                       {type}
                     </SelectItem>
@@ -202,9 +223,9 @@ const MenuSelectionForm = () => {
                 <p className="text-sm text-red-500 mt-1 animate-in">{errors.mealType}</p>
               )}
             </motion.div>
-            
+            <CardContent>
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="date" className="text-sm font-medium">Date</Label>
+              <Label htmlFor="date" className="text-sm font-medium" style={{ color: 'white' }}>Date</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <motion.div 
@@ -213,18 +234,25 @@ const MenuSelectionForm = () => {
                   >
                     <Button
                       variant="outline"
-                      className={cn(
-                        "w-full justify-start text-left font-normal transition-all",
-                        "hover:border-primary/50 focus:ring-2 focus:ring-primary/20",
-                        !formData.date && "text-muted-foreground"
-                      )}
+                      style={{
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        color: 'white',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                        }
+                      }}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {formData.date ? format(formData.date, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </motion.div>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 pointer-events-auto">
+                <PopoverContent style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}>
                   <Calendar
                     mode="single"
                     selected={formData.date}
@@ -235,20 +263,23 @@ const MenuSelectionForm = () => {
                 </PopoverContent>
               </Popover>
             </motion.div>
-            
+            </CardContent>
             <motion.div className="space-y-2" variants={itemVariants}>
-              <Label htmlFor="suggestion" className="text-sm font-medium">Food Item Suggestion</Label>
+              <Label htmlFor="suggestion" className="text-sm font-medium" style={{ color: 'white' }}>Food Item Suggestion</Label>
               <Textarea
                 id="suggestion"
                 name="suggestion"
                 placeholder="Suggest food items you would like to see on the menu"
                 value={formData.suggestion}
                 onChange={handleTextareaChange}
-                className={cn(
-                  "min-h-32 transition-all duration-200",
-                  "hover:border-primary/50",
-                  "focus:ring-2 focus:ring-primary/20"
-                )}
+                style={{
+                  backgroundColor: 'black',
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  '&:hover': {
+                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                  }
+                }}
               />
             </motion.div>
             
@@ -299,6 +330,7 @@ const MenuSelectionForm = () => {
             </Button>
           </motion.div>
         </form>
+        </Card>
       </BlurCard>
     </motion.div>
   );

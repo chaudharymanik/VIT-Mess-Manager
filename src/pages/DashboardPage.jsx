@@ -5,7 +5,6 @@ import Dashboard from "@/components/dashboard/Dashboard";
 import "../styles/Page.css";
 
 const DashboardPage = () => {
-  // Add a fade-in effect when the component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.classList.add("animate-in");

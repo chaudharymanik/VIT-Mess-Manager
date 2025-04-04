@@ -5,7 +5,6 @@ import StudentForm from "@/components/forms/StudentForm";
 import "../styles/Page.css";
 
 const Register = () => {
-  // Add a fade-in effect when the component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.classList.add("animate-in");
