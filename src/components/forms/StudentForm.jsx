@@ -45,8 +45,8 @@ const StudentForm = () => {
 
     if (!formData.roomNumber) {
       newErrors.roomNumber = 'Room number is required';
-    } else if (!/^\d{3}$/.test(formData.roomNumber)) {
-      newErrors.roomNumber = 'Room number must be 3 digits';
+    } else if (!/^\d{3,}$/.test(formData.roomNumber)) {
+      newErrors.roomNumber = 'Room number must be 3 or more digits';
     }
 
     if (!formData.mess) {
