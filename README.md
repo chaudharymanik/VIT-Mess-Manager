@@ -1,6 +1,6 @@
 ---
 
-### Project Overview
+## Project Overview
 
 **VIT Mess Manager** is a full-stack web application designed to streamline and enhance the management of mess (cafeteria) operations at VIT. The platform provides tools for students and administrators to manage food preferences, track and analyze food waste, and improve overall mess efficiency.
 
