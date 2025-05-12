@@ -44,7 +44,7 @@
 
 ### Technology Stack
 
-- **Frontend:** React, Tailwind CSS (or similar utility-first CSS), Recharts, Framer Motion
+- **Frontend:** React, Tailwind CSS, Recharts, Framer Motion
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB (with Mongoose)
 - **Other:** Lucide React icons, custom SVG favicon, responsive and accessible design
